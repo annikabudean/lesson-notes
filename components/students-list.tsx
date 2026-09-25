@@ -1,11 +1,11 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { getStudents } from '../../api/students';
+import { getStudents, type Student } from '../api/students';
 import StudentCard from './student-card';
 
 export default function StudentsList() {
-  const [students, setStudents] = useState([]);
+  const [students, setStudents] = useState<Student[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -28,7 +28,7 @@ export default function StudentsList() {
 
   return (
     <div className="">
-        <ul className="flex flex-col gap-2 text-black">
+        <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-9 text-black px-40">
             {students.map((student) => (
                 <StudentCard key={student.id} student={student} />
             ))}
