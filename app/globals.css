@@ -48,6 +48,15 @@
   --radius-4xl: calc(var(--radius) * 2.6);
 }
 
+@theme {
+  --color-ivory: #FAF7F2;
+  --color-cream: #F3EEE4;
+  --color-charcoal: #2B2924;
+  --color-warm-gray: #6B6558;
+  --color-forest: #3A5A45;
+  --color-taupe: #DCD4C4;
+}
+
 :root {
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);

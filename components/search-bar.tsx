@@ -6,11 +6,11 @@ export function SearchBar() {
   return (
     <Field orientation="horizontal">
       <Input 
-        className="bg-white text-black h-15 w-full" 
+        className="bg-cream border border-taupe text-charcoal placeholder:text-warm-gray focus:border-forest focus:bg-ivory focus:outline-none h-10 w-full" 
         type="search" 
         placeholder="Search for a student..." 
       />
-      <Button variant="outline" className="text-black h-15"> Search </Button>
+      <Button variant="outline" className="text-black h-10"> Search </Button>
     </Field> 
   )
 }

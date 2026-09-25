@@ -12,7 +12,7 @@ export function StudentAvatar({ name }: { name: string }) {
 
   return (
     <Avatar size="lg">
-      <AvatarFallback className="">{initials}</AvatarFallback>
+      <AvatarFallback className="bg-forest text-[#FAF7F2]">{initials}</AvatarFallback>
     </Avatar>
   )
 }

@@ -41,7 +41,7 @@ export default function AddStudentForm() {
         <button
           type="submit"
           disabled={loading}
-          className="bg-blue-500 text-white px-4 py-2 rounded-lg disabled:opacity-50"
+          className="bg-[#3A5A45] text-[#FAF7F2] px-4 py-2 rounded-lg disabled:opacity-50"
         >
           {loading ? 'Adding...' : 'Add Student'}
         </button>
