@@ -3,6 +3,7 @@
 // app/students/[id]/page.tsx
 import { getLessonNotes, type LessonNote } from '@/api/lessons'
 import { getStudentById, type Student } from '@/api/students'
+import { AddLessonModal } from '@/components/add-lesson-modal'
 import { StudentAvatar } from '@/components/student-avatar'
 import Link from 'next/link'
 import { useState, useEffect } from 'react'
@@ -15,6 +16,7 @@ export default function StudentDetailPage() {
   const [student, setStudent] = useState<Student | null>(null);
   const [notes, setNotes] = useState<LessonNote[]>([]);
   const [loading, setLoading] = useState(true);
+  const [isAddLessonOpen, setIsAddLessonOpen] = useState(false);
 
   useEffect(() => {
     let isActive = true;
@@ -82,7 +84,7 @@ export default function StudentDetailPage() {
 
             <button
               type="button"
-              onClick={() => window.alert('Adding lesson notes will be available soon.')}
+              onClick={() => setIsAddLessonOpen(true)}
               disabled={loading || !student}
               className="inline-flex shrink-0 items-center justify-center gap-2 rounded-lg bg-[#3A5A45] px-5 py-3 text-sm font-semibold text-[#FAF7F2] transition-colors hover:bg-[#2F4938] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#3A5A45] disabled:cursor-not-allowed disabled:opacity-50"
             >
@@ -142,6 +144,20 @@ export default function StudentDetailPage() {
           )}
         </section>
       </div>
+
+      <AddLessonModal
+        isOpen={isAddLessonOpen}
+        studentId={id}
+        onClose={() => setIsAddLessonOpen(false)}
+        onLessonAdded={(lesson) => {
+          setNotes((currentNotes) =>
+            [lesson, ...currentNotes].sort(
+              (first, second) =>
+                new Date(second.created_at).getTime() - new Date(first.created_at).getTime(),
+            ),
+          )
+        }}
+      />
     </main>
   );
 }

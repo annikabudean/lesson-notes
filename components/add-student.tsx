@@ -2,11 +2,13 @@
 'use client'
 
 import { useState } from 'react'
-import { useRouter } from 'next/navigation'
-import { createStudent } from '../api/students'
+import { createStudent, type Student } from '../api/students'
 
-export default function AddStudentForm() {
-  const router = useRouter()
+export default function AddStudentForm({
+  onStudentCreated,
+}: {
+  onStudentCreated: (student: Student) => void
+}) {
   const [name, setName] = useState('')
   const [instrument, setInstrument] = useState('')
   const [loading, setLoading] = useState(false)
@@ -18,10 +20,10 @@ export default function AddStudentForm() {
     setError(null)
 
     try {
-      await createStudent({ name, instrument })
+      const student = await createStudent({ name, instrument })
+      onStudentCreated(student)
       setName('')
       setInstrument('')
-      router.refresh() // re-fetches server data so the new student shows up
       console.log('Student added successfully')
     } catch (err) {
       setError('Failed to add student. Please try again.')

@@ -21,3 +21,22 @@ export async function getLessonNotes(studentId: string) {
   
   return data || []
 }
+
+export async function addLessonNote(studentId: string, notes: string, lessonDate: string) {
+  const { data, error } = await supabase
+    .from('Lessons')
+    .insert({
+      student_id: studentId,
+      notes,
+      created_at: new Date(`${lessonDate}T12:00:00`).toISOString(),
+    })
+    .select()
+    .single()
+
+  if (error) {
+    console.error('Error adding lesson note:', error)
+    return null
+  }
+
+  return data
+}
