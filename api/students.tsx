@@ -3,6 +3,7 @@ import { supabase } from '../lib/supabase'
 export type Student = {
   id: string;
   name: string;
+  instrument: string;
 };
 
 export async function getStudents() {
@@ -23,7 +24,7 @@ export async function getStudentById(id: string) {
     return data
 }
 
-export async function createStudent(student: { name: string }) {
+export async function createStudent(student: { name: string, instrument: string }) {
     const { data, error } = await supabase
         .from('Students')
         .insert(student)

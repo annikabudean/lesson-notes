@@ -1,7 +1,8 @@
 import { supabase } from '../lib/supabase'
 
-export type Lesson = {
+export type LessonNote = {
   id: string;
+  created_at: string;
   student_id: string;
   notes: string;
 };
@@ -17,7 +18,6 @@ export async function getLessonNotes(studentId: string) {
     console.error('Error fetching lesson notes:', error)
     return []
   }
-  console.log('Fetched lesson notes:', data)
-
+  
   return data || []
 }

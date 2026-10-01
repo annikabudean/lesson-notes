@@ -8,6 +8,7 @@ import { createStudent } from '../api/students'
 export default function AddStudentForm() {
   const router = useRouter()
   const [name, setName] = useState('')
+  const [instrument, setInstrument] = useState('')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
@@ -17,9 +18,11 @@ export default function AddStudentForm() {
     setError(null)
 
     try {
-      await createStudent({ name })
+      await createStudent({ name, instrument })
       setName('')
+      setInstrument('')
       router.refresh() // re-fetches server data so the new student shows up
+      console.log('Student added successfully')
     } catch (err) {
       setError('Failed to add student. Please try again.')
     } finally {
@@ -35,6 +38,14 @@ export default function AddStudentForm() {
           placeholder="Student name"
           value={name}
           onChange={(e) => setName(e.target.value)}
+          required
+          className="border rounded-lg p-2 flex-1"
+        />
+        <input
+          type="text"
+          placeholder="Instrument"
+          value={instrument}
+          onChange={(e) => setInstrument(e.target.value)}
           required
           className="border rounded-lg p-2 flex-1"
         />
